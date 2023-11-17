@@ -24,24 +24,32 @@
     </v-navigation-drawer>
 
     <!-- 上侧应用栏容器 -->
-    <v-app-bar rounded>
+    <v-app-bar
+      :clipped-left="$vuetify.breakpoint.lgAndUp"
+      color="blue"
+      dark
+      rounded>
       <!-- 控制侧导航栏状态（隐藏/显示） -->
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+
       <!-- 标题 -->
       <v-toolbar-title
         class="hidden-sm-and-down ml-0 pl-4"
         style="width: 300px"
       >
-        <!-- 搜索框 -->
-        <v-text-field
-          flat
-          solo-inverted
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          label="搜索"
-        />
+        <!-- <span style="cursor:pointer" @click="goToHome()">{{ this.$store.state.webInfo.name }}</span> -->
       </v-toolbar-title>
 
+      <!-- 搜索框 -->
+      <v-text-field
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="搜索"
+      />
+      <v-spacer />
+      
       <v-btn icon>
         <v-icon>mdi-bell</v-icon>
       </v-btn>

@@ -25,7 +25,6 @@
 
     <!-- 上侧应用栏容器 -->
     <v-app-bar
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
       color="blue"
       dark
       rounded>

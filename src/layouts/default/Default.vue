@@ -1,9 +1,9 @@
 <template>
-  <default-bar />
+  <DefaultBar />
 
-  <default-view />
+  <DefaultView />
   
-  <default-footer />
+  <DefaultFooter />
 </template>
 
 <script setup>

@@ -37,7 +37,6 @@
         class="hidden-sm-and-down ml-0 pl-4"
         style="width: 300px"
       >
-        <!-- <span style="cursor:pointer" @click="goToHome()">{{ this.$store.state.webInfo.name }}</span> -->
       </v-toolbar-title>
 
       <!-- 搜索框 -->
@@ -55,7 +54,7 @@
       </v-btn>
       
       <!-- 登录按钮 -->
-      <v-btn icon>
+      <v-btn icon @click="goToLoginPage">
         <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
@@ -74,5 +73,11 @@ const items = [
   { text: '标签', icon: 'mdi-tag', link: '/tag' },
   { text: '关于', icon: 'mdi-account', link: '/about' },
 ]
+
+import { useRouter } from 'vue-router';
+const router = useRouter()
+function goToLoginPage() {
+  router.push('/login')
+}
 
 </script>

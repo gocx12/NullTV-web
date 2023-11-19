@@ -13,6 +13,7 @@
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
+          
           <v-list-item-content>
             <v-list-item-title>
               {{ item.text }}
@@ -27,7 +28,7 @@
     <v-app-bar
       color="blue"
       dark
-      rounded>
+    >
       <!-- 控制侧导航栏状态（隐藏/显示） -->
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
@@ -73,7 +74,5 @@ const items = [
   { text: '标签', icon: 'mdi-tag', link: '/tag' },
   { text: '关于', icon: 'mdi-account', link: '/about' },
 ]
-
-
 
 </script>

@@ -2,8 +2,8 @@
   <div>
     <v-img
       class="mx-auto my-6"
-      max-width="228"
-      src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg"
+      max-width="100"
+      src="@/assets/NULLTV_logo.svg"
     ></v-img>
 
     <v-card
@@ -12,70 +12,146 @@
       max-width="448"
       rounded="lg"
     >
-      <div class="text-subtitle-1 text-medium-emphasis">Account</div>
-      <v-text-field
-        density="compact"
-        placeholder="Email address"
-        prepend-inner-icon="mdi-email-outline"
-        variant="outlined"
-        v-model="email"
-        :rules="[rules.required, rules.email]"
-      ></v-text-field>
 
-      <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
-        Password
-        <a
-          class="text-caption text-decoration-none text-blue"
-          href="#"
-          rel="noopener noreferrer"
-          target="_blank"
+      <div v-if="is_register">
+        <div class="text-subtitle-1 text-medium-emphasis">Account</div>
+        <v-text-field
+          density="compact"
+          placeholder="Email address"
+          prepend-inner-icon="mdi-email-outline"
+          variant="outlined"
+          v-model="email"
+          :rules="[rules.required, rules.email]"
+        ></v-text-field>
+
+        <div class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between">
+          Password
+          <a
+            class="text-caption text-decoration-none text-blue"
+            href="#"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Forgot password?</a>
+        </div>
+        <v-text-field
+          :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+          :type="password_visible ? 'text' : 'password'"
+          density="compact"
+          placeholder="Enter your password"
+          prepend-inner-icon="mdi-lock-outline"
+          variant="outlined"
+          @click:append-inner="password_visible = !password_visible"
+          v-model="password"
+          :rules="[rules.required]"
+        ></v-text-field>
+
+
+        <v-card
+          class="mb-12"
+          color="surface-variant"
+          variant="tonal"
         >
-          Forgot password?</a>
-      </div>
-      <v-text-field
-        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-        :type="passwordVisible ? 'text' : 'password'"
-        density="compact"
-        placeholder="Enter your password"
-        prepend-inner-icon="mdi-lock-outline"
-        variant="outlined"
-        @click:append-inner="passwordVisible = !passwordVisible"
-        v-model="password"
-        :rules="[rules.required]"
-      ></v-text-field>
+          <v-card-text class="text-medium-emphasis text-caption">
+            Warning: After 3 consecutive failed login attempts, you account will be temporarily locked for three hours. If you must login now, you can also click "Forgot login password?" below to reset the login password.
+          </v-card-text>
+        </v-card>
 
-      <v-card
-        class="mb-12"
-        color="surface-variant"
-        variant="tonal"
-      >
-        <v-card-text class="text-medium-emphasis text-caption">
-          Warning: After 3 consecutive failed login attempts, you account will be temporarily locked for three hours. If you must login now, you can also click "Forgot login password?" below to reset the login password.
+        <v-btn
+          block
+          class="mb-8"
+          color="blue"
+          size="large"
+          variant="tonal"
+          @click="login({email: email, password: password})"
+        >
+          Log In
+        </v-btn>
+
+        <v-card-text class="text-center">
+          <a
+            class="text-blue text-decoration-none"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <v-btn variant="text" :ripple="false"
+              @click="is_register = !is_register"
+            >Sign up now 
+              <v-icon icon="mdi-chevron-right"></v-icon>
+            </v-btn>
+          </a>
         </v-card-text>
-      </v-card>
+      </div>
+    
+      
+      <div v-if="!is_register">
+        <div class="text-subtitle-1 text-medium-emphasis">Username</div>
+        <v-text-field
+          density="compact"
+          placeholder="User name"
+          prepend-inner-icon="mdi-email-outline"
+          variant="outlined"
+          v-model="email"
+          :rules="[rules.required, rules.email]"
+        ></v-text-field>
 
-      <v-btn
-        block
-        class="mb-8"
-        color="blue"
-        size="large"
-        variant="tonal"
-        @click="login({email: email, password: password})"
-      >
-        Log In
-      </v-btn>
+        <div class="text-subtitle-1 text-medium-emphasis">Account</div>
+        <v-text-field
+          density="compact"
+          placeholder="Email address"
+          prepend-inner-icon="mdi-email-outline"
+          variant="outlined"
+          v-model="email"
+          :rules="[rules.required, rules.email]"
+        ></v-text-field>
 
-      <v-card-text class="text-center">
-        <a
-          class="text-blue text-decoration-none"
-          href="#"
-          rel="noopener noreferrer"
-          target="_blank"
+        <div class="text-subtitle-1 text-medium-emphasis">Password</div>
+          <v-text-field
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+            :type="password_visible ? 'text' : 'password'"
+            density="compact"
+            placeholder="Enter your password"
+            prepend-inner-icon="mdi-lock-outline"
+            variant="outlined"
+            @click:append-inner="password_visible = !password_visible"
+            v-model="password"
+            :rules="[rules.required]"
+        ></v-text-field>
+
+        <div class="text-subtitle-1 text-medium-emphasis">Password Again</div>
+          <v-text-field
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+            :type="password_visible ? 'text' : 'password'"
+            density="compact"
+            placeholder="Enter your password again"
+            prepend-inner-icon="mdi-lock-outline"
+            variant="outlined"
+            @click:append-inner="password_visible = !password_visible"
+            v-model="password"
+            :rules="[rules.required]"
+        ></v-text-field>
+
+        <v-btn
+          block
+          class="mb-8"
+          color="blue"
+          size="large"
+          variant="tonal"
+          @click="register({username: username, email: email, password: password})"
         >
-          Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
-        </a>
-      </v-card-text>
+          Sign Up
+        </v-btn>
+
+        <v-btn variant="text" :ripple="false"
+              @click="is_register = !is_register"
+            >back to login 
+              <v-icon icon="mdi-chevron-right"></v-icon>
+            </v-btn>
+
+      </div>
+
     </v-card>
+
   </div>
 </template>
 
@@ -85,7 +161,9 @@ import { ref } from 'vue'
 const email = ref(null)
 const password = ref(null)
 
-const passwordVisible = ref(false)
+const password_visible = ref(false)
+
+const is_register = ref(true)
 
 const rules = {
   required: value => !!value || 'Required.',
@@ -101,7 +179,6 @@ function login(value) {
   fetch(`/user/login`, {
       headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'X-XSRF-TOKEN': this.$cookies.get('XSRF-TOKEN')
       },
       method: 'POST',
       credentials: 'include',
@@ -125,6 +202,34 @@ function login(value) {
   })
 }
 
+
+function register(value) {
+  console.log(value)
+  fetch(`/user/register`, {
+      headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+      },
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(value)
+  })
+  .then(response => response.json())
+  .then(json => {
+      if (json.status === 200) {
+          const user = json.data
+          // 保存用户信息
+          this.$store.commit('setUserInfo', user)
+          // 跳转到首页
+          this.$router.push('/')
+      } else {
+          this.message = json.message
+          this.showMessage = true
+      }
+  })
+  .catch(e => {
+      return null
+  })
+}
 
 
 </script>

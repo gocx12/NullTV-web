@@ -17,14 +17,6 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login.vue'),
-    meta: {
-      title: '登录'
-    }
-  },
 ]
 
 const router = createRouter({

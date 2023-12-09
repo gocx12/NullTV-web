@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-img
+    <!-- <v-img
       class="mx-auto my-6"
       max-width="100"
       src="@/assets/NULLTV_logo.svg"
-    ></v-img>
+    ></v-img> -->
 
     <v-card
       class="mx-auto pa-12 pb-8"
@@ -91,8 +91,8 @@
           placeholder="User name"
           prepend-inner-icon="mdi-email-outline"
           variant="outlined"
-          v-model="email"
-          :rules="[rules.required, rules.email]"
+          v-model="username"
+          :rules="[rules.required]"
         ></v-text-field>
 
         <div class="text-subtitle-1 text-medium-emphasis">Account</div>
@@ -127,7 +127,7 @@
             prepend-inner-icon="mdi-lock-outline"
             variant="outlined"
             @click:append-inner="password_visible = !password_visible"
-            v-model="password"
+            v-model="password_again"
             :rules="[rules.required]"
         ></v-text-field>
 
@@ -143,10 +143,11 @@
         </v-btn>
 
         <v-btn variant="text" :ripple="false"
-              @click="is_register = !is_register"
-            >back to login 
-              <v-icon icon="mdi-chevron-right"></v-icon>
-            </v-btn>
+          @click="is_register = !is_register"
+        >
+          back to login 
+          <v-icon icon="mdi-chevron-right"></v-icon>
+        </v-btn>
 
       </div>
 
@@ -158,8 +159,10 @@
 <script setup>
 import { ref } from 'vue'
 
+const username = ref(null)
 const email = ref(null)
 const password = ref(null)
+const password_again = ref(null)
 
 const password_visible = ref(false)
 
@@ -176,7 +179,7 @@ const rules = {
 
 function login(value) {
   console.log(value)
-  fetch(`/user/login`, {
+  fetch(`127.0.0.1:8888/user/login`, {
       headers: {
           'Content-Type': 'application/json; charset=UTF-8',
       },

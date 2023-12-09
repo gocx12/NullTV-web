@@ -1,36 +1,11 @@
 <template>
   <div>
-    <!-- 侧导航栏 -->
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      clipped
-    >
-      <router-link v-for="item in items" :key="item.text" :to="item.link">
-        <v-list-item
-          link
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ item.text }}
-            </v-list-item-title>
-          </v-list-item-content>
-
-        </v-list-item>
-      </router-link>
-    </v-navigation-drawer>
-
     <!-- 上侧应用栏容器 -->
     <v-app-bar
       color="blue"
       dark
     >
       <!-- 控制侧导航栏状态（隐藏/显示） -->
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
       <!-- 标题 -->
       <v-toolbar-title
@@ -53,10 +28,18 @@
         <v-icon>mdi-bell</v-icon>
       </v-btn>
       
-      <!-- 登录按钮 -->
-      <v-btn icon @click="goToLoginPage">
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
+      <!-- 登录  -->
+      <v-dialog>
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon>
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
+        </template>
+
+        <Login/>
+
+      </v-dialog>
+
     </v-app-bar>
 
   </div>
@@ -65,6 +48,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Login from '@/components/Login.vue'
 const drawer = ref(false)
 
 const items = [

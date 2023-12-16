@@ -1,16 +1,15 @@
 <template>
-
-  
   <!-- padding-left: 10px; padding-right: 10px; -->
   <div style="width: 350px">
     <router-link :to="`/video/${videoInfo.id}`">
-      <v-img
+      <!-- <v-img
         :src="videoInfo.cover_url"
         outlined
         aspect-ratio="1.77"
         class="white--text align-end"
         >
-      </v-img>
+      </v-img> -->
+      <VideoPlayer :options="videoOptions"/>
     </router-link>
     <v-row style="padding-top: 1px; padding-bottom: 12px">
       <v-col cols="10">
@@ -33,9 +32,8 @@
 
 
 <script setup>
-// import TimeUtil from '@/utils/time-util.vue'
-// import StringUtils from '@/utils/string-utils.vue'
 import { ref } from 'vue'
+import VideoPlayer  from './VideoPlayer.vue'
 const props = defineProps({
   video: {
     type: Object,
@@ -44,8 +42,14 @@ const props = defineProps({
 })
 
 const videoInfo = ref(props.video)
+
+const videoOptions = {
+  autoplay: true,
+  controls: true,
+  sources: [{
+    src: require("./abc.mp4"),
+    type: 'video/mp4'
+  }]
+}
+
 </script>
-
-<style>
-
-</style>
